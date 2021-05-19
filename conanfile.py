@@ -2,7 +2,7 @@ from conans import ConanFile, CMake
 
 class TopoculeConan(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
-    requires = "boost/1.73.0", "gmp/6.2.1", "mpfr/4.1.0", "eigen/3.3.9", "cgal/5.2.1"
+    requires = "boost/1.73.0", "gmp/6.2.1", "mpfr/4.1.0", "eigen/3.3.9", "cgal/5.2.1", "cairo/1.17.4"
     generators = "cmake"
     # Shared libs in conan are poorly maintained regarding the rpath, though.
     default_options = {"openssl:shared": True}
