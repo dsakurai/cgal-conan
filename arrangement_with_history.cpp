@@ -1,4 +1,7 @@
 // Constructing an arrangement with curve history.
+
+/// This is unnecessary, however, because we can store edge IDs with traits-class decorators instead.
+
 #include <CGAL/Cartesian.h>
 #include <CGAL/Exact_rational.h>
 #include <CGAL/Arr_segment_traits_2.h>
@@ -17,7 +20,10 @@ typedef CGAL::Arr_simple_point_location<Arr_with_hist_2>  Point_location;
 int main()
 {
 
-    /// TODO store information on edges
+    /// TODO store information on edges.
+    /// Options:
+    /// 1. Use the traits-class decorators on edges https://doc.cgal.org/latest/Arrangement_on_surface_2/index.html#arr_ssecmeta_tr
+    /// 2. Extend the DCEL (doubly-connected edge-list) records
 
     Arr_with_hist_2   arr;
 
