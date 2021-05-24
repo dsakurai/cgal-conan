@@ -97,7 +97,12 @@ int main ()
 
     Polygon_set_operations_traits tr {};
 
-    // TODO Store the curve history: https://doc.cgal.org/latest/Arrangement_on_surface_2/index.html#title57
+    // Options:
+    // 1. Set data on edges: https://doc.cgal.org/latest/Arrangement_on_surface_2/index.html#arr_ssecmeta_tr
+    //
+    // There's an additional option which looks, however, irrelevant to us because it focuses on recording coordinates.
+    // 2. Store history: https://doc.cgal.org/latest/Arrangement_on_surface_2/index.html#title57
+
     {
 
     }
