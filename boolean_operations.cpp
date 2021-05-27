@@ -131,8 +131,43 @@ typedef std::list<Polygon_with_holes_2>                   Pwh_list_2;
 //
 //
 
+template <class X_monotone_curve_2_, class Polygon_>
+class My_Polygon_2_curve_iterator:
+    public CGAL::Polygon_2_curve_iterator<X_monotone_curve_2_, Polygon_> {
+
+    using X_monotone_curve_2 = X_monotone_curve_2_;
+
+    X_monotone_curve_2 operator*()
+    {
+        return X_monotone_curve_2(this->m_curr_edge->first, this->m_curr_edge->second);
+    }
+};
+
 template <class Kernel, class Container, class Traits_2>
 class My_Gps_segment_traits_2: public CGAL::Gps_segment_traits_2<Kernel, Container, Traits_2 > {
+public:
+    using Base                 = CGAL::Gps_segment_traits_2<Kernel, Container, Traits_2 >;
+    using General_polygon_2    = typename Base::General_polygon_2;
+    using X_monotone_curve_2   = typename Base::X_monotone_curve_2;
+    using Curve_const_iterator = My_Polygon_2_curve_iterator<X_monotone_curve_2, Polygon_2>;
+
+
+    class Construct_curves_2 {
+    public:
+        std::pair<Curve_const_iterator, Curve_const_iterator>
+        operator()(const General_polygon_2& pgn) const
+        {
+            Curve_const_iterator c_begin(&pgn, pgn.vertex_pairs_begin());
+            Curve_const_iterator c_end(&pgn, pgn.vertex_pairs_end());
+
+            return (std::make_pair(c_begin, c_end));
+        }
+    };
+
+    Construct_curves_2 construct_curves_2_object() const
+    {
+        return Construct_curves_2();
+    }
 };
 
 using Default = CGAL::Gps_segment_traits_2<Kernel, Polygon_2::Container, CGAL::Arr_segment_traits_2<Kernel> >; // The same default, ripped away of the wrapper class
@@ -145,7 +180,8 @@ using Polygon_set_operations_traits
     = Default;
 //    = With_data_bad;
 //    = With_data_new;
-// How can I set an arrangement with data  to Arr_segment_traits_2?
+//
+// How can I set an arrangement with data to Arr_segment_traits_2?
     // Arrangement_2 -has-> Traits (i.e. Arr_consolidated_curve_data_traits_2) (== arrangement with data) -is-> Arr_segment_traits_2
     // Gps_segment_traits_2 -is-> (i.e. Arr_consolidated_curve_data_traits_2)
 
