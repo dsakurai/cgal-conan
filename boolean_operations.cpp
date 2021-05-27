@@ -131,15 +131,21 @@ typedef std::list<Polygon_with_holes_2>                   Pwh_list_2;
 //
 //
 
+template <class Kernel, class Container, class Traits_2>
+class My_Gps_segment_traits_2: public CGAL::Gps_segment_traits_2<Kernel, Container, Traits_2 > {
+};
+
 using Default = CGAL::Gps_segment_traits_2<Kernel, Polygon_2::Container, CGAL::Arr_segment_traits_2<Kernel> >; // The same default, ripped away of the wrapper class
 // This is the same as    = typename CGAL::Gps_default_traits<Polygon_2>::Traits; // default
 
-using With_data = CGAL::Gps_segment_traits_2<Kernel, Polygon_2::Container, Traits_2 >; // Decorate arrangement with additional data
+using With_data_bad = My_Gps_segment_traits_2<Kernel, Polygon_2::Container, Traits_2 >; // Decorate arrangement with additional data
+using With_data_new = CGAL::Gps_segment_traits_2<Kernel, Polygon_2::Container, Traits_2 >; // Decorate arrangement with additional data
 
 using Polygon_set_operations_traits
     = Default;
-//    = With_data;
-    // How can I set an arrangement with data  to Arr_segment_traits_2?
+//    = With_data_bad;
+//    = With_data_new;
+// How can I set an arrangement with data  to Arr_segment_traits_2?
     // Arrangement_2 -has-> Traits (i.e. Arr_consolidated_curve_data_traits_2) (== arrangement with data) -is-> Arr_segment_traits_2
     // Gps_segment_traits_2 -is-> (i.e. Arr_consolidated_curve_data_traits_2)
 
@@ -237,7 +243,8 @@ int main ()
     // CGAL::Gps_on_surface_base_2<CGAL::Gps_segment_traits_2<CGAL::Epeck, std::__1::vector<CGAL::Point_2<CGAL::Epeck>, std::__1::allocator<CGAL::Point_2<CGAL::Epeck> > >, CGAL::Arr_segment_traits_2<CGAL::Epeck> >, CGAL::Arr_bounded_planar_topology_traits_2<CGAL::Gps_segment_traits_2<CGAL::Epeck, std::__1::vector<CGAL::Point_2<CGAL::Epeck>, std::__1::allocator<CGAL::Point_2<CGAL::Epeck> > >, CGAL::Arr_segment_traits_2<CGAL::Epeck> >, CGAL::Gps_default_dcel<CGAL::Gps_segment_traits_2<CGAL::Epeck, std::__1::vector<CGAL::Point_2<CGAL::Epeck>, std::__1::allocator<CGAL::Point_2<CGAL::Epeck> > >, CGAL::Arr_segment_traits_2<CGAL::Epeck> > > >, CGAL::Boolean_set_operation_2_internal::PreconditionValidationPolicy>::join(CGAL::Polygon_2<CGAL::Epeck, std::__1::vector<CGAL::Point_2<CGAL::Epeck>, std::__1::allocator<CGAL::Point_2<CGAL::Epeck> > > > const&) Gps_on_surface_base_2.h:355
     // bool CGAL::_join<CGAL::Polygon_2<CGAL::Epeck, std::__1::vector<CGAL::Point_2<CGAL::Epeck>, std::__1::allocator<CGAL::Point_2<CGAL::Epeck> > > >, CGAL::Polygon_2<CGAL::Epeck, std::__1::vector<CGAL::Point_2<CGAL::Epeck>, std::__1::allocator<CGAL::Point_2<CGAL::Epeck> > > >, CGAL::Gps_segment_traits_2<CGAL::Epeck, std::__1::vector<CGAL::Point_2<CGAL::Epeck>, std::__1::allocator<CGAL::Point_2<CGAL::Epeck> > >, CGAL::Arr_segment_traits_2<CGAL::Epeck> > >(CGAL::Polygon_2<CGAL::Epeck, std::__1::vector<CGAL::Point_2<CGAL::Epeck>, std::__1::allocator<CGAL::Point_2<CGAL::Epeck> > > > const&, CGAL::Polygon_2<CGAL::Epeck, std::__1::vector<CGAL::Point_2<CGAL::Epeck>, std::__1::allocator<CGAL::Point_2<CGAL::Epeck> > > > const&, CGAL::Gps_segment_traits_2<CGAL::Epeck, std::__1::vector<CGAL::Point_2<CGAL::Epeck>, std::__1::allocator<CGAL::Point_2<CGAL::Epeck> > >, CGAL::Arr_segment_traits_2<CGAL::Epeck> >::Polygon_with_holes_2&, CGAL::Gps_segment_traits_2<CGAL::Epeck, std::__1::vector<CGAL::Point_2<CGAL::Epeck>, std::__1::allocator<CGAL::Point_2<CGAL::Epeck> > >, CGAL::Arr_segment_traits_2<CGAL::Epeck> >&) Bso_internal_functions.h:114
     // bool CGAL::join<CGAL::Epeck, std::__1::vector<CGAL::Point_2<CGAL::Epeck>, std::__1::allocator<CGAL::Point_2<CGAL::Epeck> > >, CGAL::Gps_segment_traits_2<CGAL::Epeck, std::__1::vector<CGAL::Point_2<CGAL::Epeck>, std::__1::allocator<CGAL::Point_2<CGAL::Epeck> > >, CGAL::Arr_segment_traits_2<CGAL::Epeck> > >(CGAL::Polygon_2<CGAL::Epeck, std::__1::vector<CGAL::Point_2<CGAL::Epeck>, std::__1::allocator<CGAL::Point_2<CGAL::Epeck> > > > const&, CGAL::Polygon_2<CGAL::Epeck, std::__1::vector<CGAL::Point_2<CGAL::Epeck>, std::__1::allocator<CGAL::Point_2<CGAL::Epeck> > > > const&, CGAL::Polygon_with_holes_2<CGAL::Epeck, std::__1::vector<CGAL::Point_2<CGAL::Epeck>, std::__1::allocator<CGAL::Point_2<CGAL::Epeck> > > >&, CGAL::Gps_segment_traits_2<CGAL::Epeck, std::__1::vector<CGAL::Point_2<CGAL::Epeck>, std::__1::allocator<CGAL::Point_2<CGAL::Epeck> > >, CGAL::Arr_segment_traits_2<CGAL::Epeck> >&) Boolean_set_operations_2.h:332
-    if constexpr ( std::is_same_v<Polygon_set_operations_traits,Default>) {
+//    if constexpr ( std::is_same_v<Polygon_set_operations_traits,Default>)
+    {
         if (CGAL::join (P, Q, unionR, tr)) {
             std::cout << "The union: ";
             print_polygon_with_holes (unionR);
@@ -257,8 +264,8 @@ int main ()
 
 
         // This works for Default (segments without data):
-        gps[0].insert(P);
-        gps[1].insert(Q);
+//        gps[0].insert(P);
+//        gps[1].insert(Q);
         //
         // This relies on Gps_segment_traits_2::Construct_curves_2 for creating segments (which will be inserted to the
         // arrangement). So, we can subclass Gps_segment_traits_2, customize `Construct_curves_2` and `construct_curves_2_object`.
@@ -284,18 +291,19 @@ int main ()
                     ) {
                 Polygon_2::Segment_2 segment = *edge_iter;
 
-                // Don't insert data yet.
-//                CGAL::insert(arrangement, Colored_segment_2{segment, RED}, pl);
+                if constexpr (std::is_same_v<Polygon_set_operations_traits,Default>) {
+                    // Don't add data.
+                    CGAL::insert(arrangement, segment, pl);
+                } else {
+                    // Insert data.
+                    CGAL::insert(arrangement, Colored_segment_2{segment, RED}, pl);
+                }
 
-                // This compiles with the `Default` traits (without data)
-                // but thus doesn't add data.
-                CGAL::insert(arrangement, segment, pl);
             }
         };
         // Doesn't work:
-//        insert_polygon(gps[0], P);
-//        insert_polygon(gps[1], Q);
-        //
+        insert_polygon(gps[0], P);
+        insert_polygon(gps[1], Q);
 
         std::cerr <<"gps[0].number_of_polygons_with_holes(): "<<gps[0].number_of_polygons_with_holes()<<" "<<"\t"<< __FILE__ << ":" << __LINE__ << std::endl;
         // TODO Somehow `join` reduces the number of polygons to 0. Why?
@@ -311,6 +319,8 @@ int main ()
             gps[0].polygons_with_holes(oi);
             std::cout << "The union: ";
             print_polygon_with_holes (unionR);
+        } else {
+            throw std::runtime_error {"Missed capturing polygons."};
         }
     }
 
