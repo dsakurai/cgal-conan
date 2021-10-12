@@ -3,6 +3,7 @@
 #include <CGAL/basic.h>
 #include <CGAL/Arr_extended_dcel.h>
 #include <CGAL/Arr_overlay_2.h>
+#include <CGAL/Arrangement_with_history_2.h>
 #include <CGAL/Arr_default_overlay_traits.h>
 
 #include "arr_exact_construction_segments.h"
@@ -10,7 +11,7 @@
 
 typedef unsigned int                                         Color;
 typedef CGAL::Arr_extended_dcel<Traits, Color, Color, Color> Dcel;
-typedef CGAL::Arrangement_2<Traits, Dcel>                    Ex_arrangement;
+typedef CGAL::Arrangement_with_history_2<Traits, Dcel>                    Ex_arrangement;
 
 int main()
 {
